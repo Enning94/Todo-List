@@ -12,7 +12,7 @@ body {
 }
 
 .todo-container {
-  padding: 15rem 15rem 15rem 15rem;
+  margin: 7rem;
   background-color: white;
   line-height: 2rem;
 }
@@ -34,21 +34,32 @@ li {
 .todo-input {
   display: flex;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
-.todo-input > input {
+.task-input {
   font-style: italic;
+  width: 90%;
 }
 
 .bx {
-  color: rgba(0, 0, 0, 0.25);
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 1.4rem;
 }
 
 .todo {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 0.5rem;
+}
+
+.todo-item {
+  flex: 1;
+  padding-left: 1rem;
+}
+
+.inp {
+  width: 96%;
 }
 
 hr {
@@ -65,5 +76,40 @@ hr {
   height: 3rem;
   font-size: 1rem;
   color: rgba(0, 0, 0, 0.55);
+}
+
+#input-btn {
+  cursor: pointer;
+}
+
+.task-list {
+  flex: 1;
+  margin-right: 1rem;
+}
+
+.open {
+  display: block;
+}
+
+.close {
+  display: none;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.trash-btn,
+.complete-btn {
+  cursor: pointer;
+}
+
+.bx-trash {
+  pointer-events: none;
+}
+
+button {
+  border: none;
+  background-color: white;
 }
 
