@@ -1,16 +1,16 @@
 const task = [
   {
-    index: [0],
+    index: 0,
     description: 'Take car to Garage',
     completed: false,
   },
   {
-    index: [1],
+    index: 1,
     description: 'Answer all Emails',
     completed: false,
   },
   {
-    index: [2],
+    index: 2,
     description: 'Practice JavaScript',
     completed: false,
   },
