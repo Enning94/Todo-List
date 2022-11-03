@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ToDo List</title>
+    <title>To-Do-List</title>
     <link
       href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
       rel="stylesheet"
@@ -13,18 +14,24 @@
     <div class="todo-container">
       <div class="todo-title">
         <p>Today's To Do</p>
-        <i class="bx bx-refresh"></i>
+        <button><i class="bx bx-refresh"></i></button>
       </div>
       <hr />
-      <div class="todo-input">
-        <input type="text" placeholder="Add to your list..." />
-        <i class="bx bx-subdirectory-left"></i>
-      </div>
+      <form class="todo-input" id="form-input">
+        <input
+          type="text"
+          placeholder="Add to your list..."
+          id="add-task"
+          class="task-input"
+        />
+        <button type="submit" class="enter-btn">
+          <i class="bx bx-subdirectory-left" id="input-btn"></i>
+        </button>
+      </form>
       <hr />
       <ul class="todo-list"></ul>
-      
-        <button type="button" class="remove-btn">Clear all completed</button>
-      
+      <button type="button" class="remove-btn">Clear all completed</button>
     </div>
+    <script type="module" src="./src/index.js"></script>
   </body>
 </html>

@@ -1,35 +1,19 @@
-const task = [
-  {
-    index: 0,
-    description: 'Take car to Garage',
-    completed: false,
-  },
-  {
-    index: 1,
-    description: 'Answer all Emails',
-    completed: false,
-  },
-  {
-    index: 2,
-    description: 'Practice JavaScript',
-    completed: false,
-  },
-];
+import addTodo from './modules/addTask.js';
+import deleteTodo from './modules/deleteTask.js';
+import editTodo from './modules/editTask.js';
+import getTodos from './modules/displayTodo.js';
 
-const todoList = () => {
-  const todos = document.querySelector('.todo-list');
-  task.forEach((task) => {
-    todos.innerHTML += `
-      <li class="todo">
-        <span>
-        <input class="box" type="checkbox" />
-        <input type="text" value="${task.description}" />
-        </span>
-        <i class='bx bx-dots-vertical-rounded'></i>
-      </li>
-      <hr>
-      `;
-  });
-};
+const todoBtn = document.querySelector('.enter-btn');
 
-todoList();
+const todoList = document.querySelector('.todo-list');
+
+document.addEventListener('DOMContentLoaded', getTodos);
+todoBtn.addEventListener('click', addTodo);
+todoList.addEventListener('click', deleteTodo);
+
+todoList.addEventListener('keyup', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    editTodo(e);
+  }
+});

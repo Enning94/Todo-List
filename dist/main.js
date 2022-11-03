@@ -7,6 +7,7 @@
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/style.css":
@@ -15,7 +16,6 @@
   \***********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://webpack-demo/./src/style.css?");
 
 /***/ }),
@@ -24,18 +24,106 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("const task = [\n  {\n    index: 0,\n    description: 'Take car to Garage',\n    completed: false,\n  },\n  {\n    index: 1,\n    description: 'Answer all Emails',\n    completed: false,\n  },\n  {\n    index: 2,\n    description: 'Practice JavaScript',\n    completed: false,\n  },\n];\n\nconst todoList = () => {\n  const todos = document.querySelector('.todo-list');\n  task.forEach((task) => {\n    todos.innerHTML += `\n      <li class=\"todo\">\n        <span>\n        <input class=\"box\" type=\"checkbox\" />\n        <input type=\"text\" value=\"${task.description}\" />\n        </span>\n        <i class='bx bx-dots-vertical-rounded'></i>\n      </li>\n      <hr>\n      `;\n  });\n};\n\ntodoList();\n\n//# sourceURL=webpack://webpack-demo/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_addTask_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/addTask.js */ \"./src/modules/addTask.js\");\n/* harmony import */ var _modules_deleteTask_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/deleteTask.js */ \"./src/modules/deleteTask.js\");\n/* harmony import */ var _modules_editTask_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/editTask.js */ \"./src/modules/editTask.js\");\n/* harmony import */ var _modules_displayTodo_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/displayTodo.js */ \"./src/modules/displayTodo.js\");\n\n\n\n\n\nconst todoBtn = document.querySelector('.enter-btn');\n\nconst todoList = document.querySelector('.todo-list');\n\ndocument.addEventListener('DOMContentLoaded', _modules_displayTodo_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"]);\ntodoBtn.addEventListener('click', _modules_addTask_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"]);\ntodoList.addEventListener('click', _modules_deleteTask_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"]);\n\ntodoList.addEventListener('keyup', (e) => {\n  if (e.key === 'Enter') {\n    e.preventDefault();\n    (0,_modules_editTask_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(e);\n  }\n});\n\n//# sourceURL=webpack://webpack-demo/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/modules/addTask.js":
+/*!********************************!*\
+  !*** ./src/modules/addTask.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _localStorage_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./localStorage.js */ \"./src/modules/localStorage.js\");\n\n\nconst input = document.querySelector('.task-input');\nconst todoList = document.querySelector('.todo-list');\n\nconst tasks = [];\n\nconst addTodo = (event) => {\n  event.preventDefault();\n\n  const todoDiv = document.createElement('div');\n  todoDiv.classList.add('todo');\n\n  const completedBtn = document.createElement('div');\n  completedBtn.innerHTML = '<input type=\"checkbox\" class = \"complete-btn\">';\n  todoDiv.appendChild(completedBtn);\n\n  const indexLength = tasks.length + 1;\n  const taskObj = {\n    index: indexLength,\n    description: input.value,\n    completed: false,\n  };\n  tasks.push(taskObj);\n\n  tasks.forEach((task, index) => {\n    if (index === tasks.length - 1) {\n      const newTodo = document.createElement('li');\n      newTodo.classList.add('todo-item');\n      newTodo.innerHTML = `<input type=\"text\" value = \"${taskObj.description}\" class =\"inp\">`;\n      todoDiv.appendChild(newTodo);\n\n      (0,_localStorage_js__WEBPACK_IMPORTED_MODULE_0__.saveLocalTodos)(task);\n\n      const trashBtn = document.createElement('button');\n      trashBtn.innerHTML = '<i class=\"bx bx-trash\"></i>';\n      trashBtn.classList.add('trash-btn');\n      todoDiv.appendChild(trashBtn);\n\n      todoList.appendChild(todoDiv);\n    }\n  });\n  input.value = '';\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (addTodo);\n\n//# sourceURL=webpack://webpack-demo/./src/modules/addTask.js?");
+
+/***/ }),
+
+/***/ "./src/modules/deleteTask.js":
+/*!***********************************!*\
+  !*** ./src/modules/deleteTask.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _localStorage_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./localStorage.js */ \"./src/modules/localStorage.js\");\n\n\nconst deleteTodo = (e) => {\n  const item = e.target;\n  if (item.classList[0] === 'trash-btn') {\n    const todo = item.parentElement;\n    (0,_localStorage_js__WEBPACK_IMPORTED_MODULE_0__.removeLocalTodos)(todo);\n    todo.remove();\n  }\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (deleteTodo);\n\n//# sourceURL=webpack://webpack-demo/./src/modules/deleteTask.js?");
+
+/***/ }),
+
+/***/ "./src/modules/displayTodo.js":
+/*!************************************!*\
+  !*** ./src/modules/displayTodo.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst todoList = document.querySelector('.todo-list');\n\nconst getTodos = () => {\n  let todos;\n  if (localStorage.getItem('todos') === null) {\n    todos = [];\n  } else {\n    todos = JSON.parse(localStorage.getItem('todos'));\n  }\n\n  todos.forEach((todo) => {\n    const todoDiv = document.createElement('div');\n    todoDiv.classList.add('todo');\n\n    const completedBtn = document.createElement('div');\n    completedBtn.innerHTML = '<input type=\"checkbox\" class = \"complete-btn\" >';\n    todoDiv.appendChild(completedBtn);\n\n    const newTodo = document.createElement('li');\n    newTodo.classList.add('todo-item');\n    newTodo.innerHTML = `<input type=\"text\" value = \"${todo.description}\" class =\"inp\">`;\n    todoDiv.appendChild(newTodo);\n\n    const trashBtn = document.createElement('button');\n    trashBtn.innerHTML = '<i class=\"bx bx-trash\"></i>';\n    trashBtn.classList.add('trash-btn');\n    todoDiv.appendChild(trashBtn);\n    todoList.appendChild(todoDiv);\n  });\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getTodos);\n\n//# sourceURL=webpack://webpack-demo/./src/modules/displayTodo.js?");
+
+/***/ }),
+
+/***/ "./src/modules/editTask.js":
+/*!*********************************!*\
+  !*** ./src/modules/editTask.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _localStorage_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./localStorage.js */ \"./src/modules/localStorage.js\");\n\n\nconst editTodo = (e) => {\n  const item = e.target;\n  if (item.classList[0] === 'inp') {\n    const todo = item.parentElement;\n    (0,_localStorage_js__WEBPACK_IMPORTED_MODULE_0__.editLocalTodos)(todo);\n  }\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (editTodo);\n\n//# sourceURL=webpack://webpack-demo/./src/modules/editTask.js?");
+
+/***/ }),
+
+/***/ "./src/modules/localStorage.js":
+/*!*************************************!*\
+  !*** ./src/modules/localStorage.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"editLocalTodos\": () => (/* binding */ editLocalTodos),\n/* harmony export */   \"removeLocalTodos\": () => (/* binding */ removeLocalTodos),\n/* harmony export */   \"saveLocalTodos\": () => (/* binding */ saveLocalTodos)\n/* harmony export */ });\nconst saveLocalTodos = (todo) => {\n  let todos;\n  if (localStorage.getItem('todos') === null) {\n    todos = [];\n  } else {\n    todos = JSON.parse(localStorage.getItem('todos'));\n  }\n  todos.push(todo);\n  localStorage.setItem('todos', JSON.stringify(todos));\n};\n\nconst removeLocalTodos = (todo) => {\n  let todos;\n  if (localStorage.getItem('todos') === null) {\n    todos = [];\n  } else {\n    todos = JSON.parse(localStorage.getItem('todos'));\n  }\n  const todoIndex = todo.children[1].firstChild.defaultValue;\n  todos.forEach((todo) => {\n    if (todo.description === todoIndex) {\n      todos.splice(todos.indexOf(todo), 1);\n    }\n  });\n  todos.forEach((todo) => {\n    todo.index = todos.indexOf(todo) + 1;\n  });\n  localStorage.setItem('todos', JSON.stringify(todos));\n};\n\nconst editLocalTodos = (todo) => {\n  let todos;\n  if (localStorage.getItem('todos') === null) {\n    todos = [];\n  } else {\n    todos = JSON.parse(localStorage.getItem('todos'));\n  }\n  const todoIndex = todo.children[0].defaultValue;\n  const todoValue = todo.children[0].value;\n  todos.forEach((todo) => {\n    if (todo.description === todoIndex) {\n      todo.description = todoValue;\n    }\n  });\n  localStorage.setItem('todos', JSON.stringify(todos));\n};\n\n\n//# sourceURL=webpack://webpack-demo/./src/modules/localStorage.js?");
 
 /***/ })
 
 /******/ 	});
 /************************************************************************/
-/******/ 	// The require scope
-/******/ 	var __webpack_require__ = {};
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -52,9 +140,8 @@ eval("const task = [\n  {\n    index: 0,\n    description: 'Take car to Garage',
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	__webpack_modules__["./src/index.js"](0, {}, __webpack_require__);
-/******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./src/style.css"](0, __webpack_exports__, __webpack_require__);
+/******/ 	__webpack_require__("./src/index.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/style.css");
 /******/ 	
 /******/ })()
 ;
