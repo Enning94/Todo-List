@@ -17,8 +17,9 @@ const getTodos = () => {
     todoDiv.appendChild(completedBtn);
 
     const newTodo = document.createElement('li');
+    const inputClass = todo.completed === true ? 'completed' : 'inp';
     newTodo.classList.add('todo-item');
-    newTodo.innerHTML = `<input type="text" value = "${todo.description}" class ="inp">`;
+    newTodo.innerHTML = `<input type="text" value = "${todo.description}" class ="${inputClass}">`;
     todoDiv.appendChild(newTodo);
 
     const trashBtn = document.createElement('button');
