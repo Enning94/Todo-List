@@ -15,8 +15,7 @@
 - open in your vs code terminal and run live server
 
 ## Live Demo (if available)
-- N/A
-
+[Application Live Demo](https://enning94.github.io/Todo-List/dist)
 ## Authors
 
 👤 **Festus Enning**
