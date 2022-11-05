@@ -13,12 +13,14 @@ const getTodos = () => {
     todoDiv.classList.add('todo');
 
     const completedBtn = document.createElement('div');
-    completedBtn.innerHTML = '<input type="checkbox" class = "complete-btn" >';
+    const isChecked = todo.completed === true ? 'checked' : '';
+    completedBtn.innerHTML = `<input type="checkbox" class = "complete-btn" ${isChecked} id="${todo.index}">`;
     todoDiv.appendChild(completedBtn);
 
     const newTodo = document.createElement('li');
+    const inputClass = todo.completed === true ? 'completed' : 'inp';
     newTodo.classList.add('todo-item');
-    newTodo.innerHTML = `<input type="text" value = "${todo.description}" class ="inp">`;
+    newTodo.innerHTML = `<input type="text" value = "${todo.description}" class ="${inputClass}" id="${todo.index}" >`;
     todoDiv.appendChild(newTodo);
 
     const trashBtn = document.createElement('button');

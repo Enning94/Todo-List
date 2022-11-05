@@ -27,7 +27,7 @@ const addTodo = (event) => {
     if (index === tasks.length - 1) {
       const newTodo = document.createElement('li');
       newTodo.classList.add('todo-item');
-      newTodo.innerHTML = `<input type="text" value = "${taskObj.description}" class ="inp">`;
+      newTodo.innerHTML = `<input type="text" value = "${taskObj.description}" class ="inp" id="${taskObj.index}">`;
       todoDiv.appendChild(newTodo);
 
       saveLocalTodos(task);
